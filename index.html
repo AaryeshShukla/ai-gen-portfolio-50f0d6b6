@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Blog Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: hsl(210, 20%, 10%);
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --accent-color: hsl(240, 100%, 60%);
+            --hover-color: hsl(240, 100%, 70%);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: var(--transition);
+        }
+        .navbar a:hover {
+            color: var(--hover-color);
+        }
+        .search-bar {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar input {
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: none;
+            width: 300px;
+        }
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .category {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--card-bg);
+            transition: var(--transition);
+        }
+        .category:hover {
+            background-color: var(--hover-color);
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+        }
+        .post-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            transition: var(--transition);
+            position: relative;
+        }
+        .post-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .featured {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+        }
+        .newsletter {
+            margin: 40px 0;
+            text-align: center;
+        }
+        .newsletter input {
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: none;
+            width: 300px;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1>My Blog</h1>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <div class="search-bar">
+        <input type="text" placeholder="Search posts..." id="searchInput" oninput="filterPosts()">
+    </div>
+    <div class="categories">
+        <div class="category">All</div>
+        <div class="category">Tech</div>
+        <div class="category">Lifestyle</div>
+        <div class="category">Travel</div>
+    </div>
+    <div class="posts-grid" id="postsGrid">
+        <div class="post-card">
+            <div class="featured">Featured</div>
+            <h2>Post Title 1</h2>
+            <p>Read time: 5 min</p>
+            <p>Author: John Doe</p>
+            <p>This is a brief description of the post content.</p>
+        </div>
+        <div class="post-card">
+            <div class="featured">Featured</div>
+            <h2>Post Title 2</h2>
+            <p>Read time: 3 min</p>
+            <p>Author: Jane Smith</p>
+            <p>This is a brief description of the post content.</p>
+        </div>
+        <div class="post-card">
+            <h2>Post Title 3</h2>
+            <p>Read time: 4 min</p>
+            <p>Author: Alice Johnson</p>
+            <p>This is a brief description of the post content.</p>
+        </div>
+    </div>
+    <div class="newsletter">
+        <h3>Subscribe to our Newsletter</h3>
+        <input type="email" placeholder="Enter your email" id="newsletterInput">
+    </div>
+    <footer>
+        <p>&copy; 2023 My Blog. All rights reserved.</p>
+    </footer>
+    <script>
+        function filterPosts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const posts = document.querySelectorAll('.post-card');
+            posts.forEach(post => {
+                const title = post.querySelector('h2').textContent.toLowerCase();
+                if (title.includes(input)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
